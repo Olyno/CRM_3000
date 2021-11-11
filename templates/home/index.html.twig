@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+<style>
+    .customer {
+        border: 1px solid;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 10px;
+    }
+    .customer footer {
+        margin-top: 10px;
+        padding: 10px;
+    }
+    header {
+        padding: 10px;
+    }
+    header div {
+        display: flex;
+    }
+    header .logout {
+        font-size: 12px;
+        height: 17px;
+        width: 35px;
+        margin-left: 10px;
+        text-align: center;
+    }
+</style>
+
+<header>
+    <div>
+        <h1>
+            {{ user.email }} {% if user.compagny %}({{ user.compagny }}){% endif %}
+        </h1>
+        <a href="{{ path('app_logout') }}" class="button-delete logout">Logout</a>
+    </div>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a class="button-info" href="{{ path('compagny_new') }}">Create new Compagny</a>
+        <a class="button-info" href="{{ path('user_new') }}">Create new User</a>
+    {% endif %}
+    <a class="button-info" href="{{ path('customer_new') }}">Create new Customer</a>
+</header>
+
+{% for customer in customers %}
+    <div class="customer">
+        <p>{{ customer.firstName }} {{ customer.lastName }}</p>
+        <footer>
+            <a class="button-info" href="{{ path('customer_edit', {'id': customer.id}) }}">Edit Customer</a>
+            {% if not is_granted('ROLE_ADMIN') %}
+                <button class="button-info">Send Email</button>
+            {% endif %}
+        </footer>
+    </div>
+{% endfor %}
+
+{% endblock %}

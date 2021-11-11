@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Signin{% endblock %}
+
+{% block body %}
+
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+    form label, form button {
+        margin-top: 10px;
+    }
+    form input {
+        padding: 5px 10px 5px 10px;
+        border-radius: 10px;
+        border: solid 1px black;
+    }
+    form #error-message {
+        color: #FF5F7E;
+    }
+</style>
+
+<form action="{{ path('signin') }}" method="post">
+    {% if error %}
+        <div id="error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="_username" value="{{ last_username }}"/>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="_password"/>
+
+    <input type="hidden" name="_target_path" value="/" />
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
+    <button type="submit" class="button-info">Signin</button>
+</form>
+
+{% endblock %}

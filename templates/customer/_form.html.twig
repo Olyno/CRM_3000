@@ -1,0 +1,14 @@
+<style>
+    .button-info {
+        background-color: #142F43;
+        color: white;
+        border-radius: 10px;
+        padding: 10px 20px;
+        text-decoration: none;
+    }
+</style>
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn button-info">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
