@@ -16,6 +16,14 @@ php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
 ```
 
+This command creates default datas in the database. This includes a default admin user:
+  - **Email:** admin@test.test
+  - **Password:** test123
+
+And a default user:
+  - **Email:** user@test.test
+  - **Password:** test123
+
 ## Usage
 
 ### Routes:
